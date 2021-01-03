@@ -1,4 +1,4 @@
-<img src="https://github.com/ashleymaeconard/time2splice/blob/master/img/time2splice_logo.png" height="150">
+<img src="https://github.com/ashleymaeconard/time2splice/blob/master/img/time2splice_logo.png" width="100%">
 
 ### time2splice
 
