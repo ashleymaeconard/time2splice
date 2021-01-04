@@ -29,7 +29,7 @@ e.g. `./2_run_suppa.sh /data/compbio/aconard/splicing/results/salmon_results/ /d
 
 Converts NM_ gene names to flybase name, then merging outputs from run_suppa (NM_ gene names by 1 TPM value column for each replicate)
 
-4_suppa.sh
+`4_suppa.sh`
 
 Identifies various forms of differential splicing (e.g. using PSI and DTU)
 
