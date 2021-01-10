@@ -101,15 +101,15 @@ Plot alternative splicing genes within categories (all females, all males, femal
 Temporal protein-DNA analysis (scripts/protein_dna/)
 ==========
 
-`protein_dna/peak_calling/1_run_picard_markduplicates.sh`
+`protein_dna/1_run_picard_markduplicates.sh`
 
-Run Picard's MarkDuplicates in for all .sorted.bam files in a given directory
+Run Picard's MarkDuplicates in for all .sorted.bam files in a given directory.
 
-`protein_dna/peak_calling/2_run_macs2.sh`
+`protein_dna/2_run_macs2.sh`
 
-Runs MACS2 to call peaks for all .sorted.bam files in a given directory
+Runs MACS2 to call peaks for all .sorted.bam files in a given directory.
 
-`protein_dna/peak_calling/3_run_macs2_fold_enrich.sh`
+`protein_dna/3_run_macs2_fold_enrich.sh`
 
 Generate signal track using MACS2 to profile transcription factor modification enrichment levels genome-wide.
 
@@ -118,19 +118,19 @@ Temporal multi-omics integration (scripts/multio_analysis)
 
 Note, there is no order to these scripts. Each analysis / results exploration is independent. There are more analysis scripts to come.
 
-`protein_dna/analysis/overlap_protein_DNA_peaks.sh`
+`analysis/overlap_protein_DNA_peaks.sh`
 
 Runs Intervene to view intersection of each narrowpeak file.
 
-`protein_dna/analysis/histogram_peak_val_intensity.ipynb`
+`analysis/histogram_peak_val_intensity.ipynb`
 
 Plot peak intensity for a given narrow peak file.
 
-`protein_dna/analysis/get_coord_run_meme.sh`
+`analysis/get_coord_run_meme.sh`
 
 Get coordinates of bed file and run through MEME.
 
-`protein_dna/analysis/alt_splicing_chi_squared.ipynb`
+`analysis/alt_splicing_chi_squared.ipynb`
 
 Perform chi-squared test on alternative splicing categories. Mutually Exclusive Exons (MXE) used in this example.
 
