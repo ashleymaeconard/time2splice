@@ -10,6 +10,31 @@ Alternative splicing can occur in at least 3/4th of human genes to encode two or
 
 **NOTE: Snakemake coming soon to use time2splice efficiently.**
 
+Preprocess Step
+==========
+
+## Retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
+
+`preprocess/1_parse_sraRunTable.sh`
+
+Creates `time2splice/` folder structure. Creates `metadatafile.csv` and `SraAccList.txt` (which is needed for next command to get .fastq files).
+
+`preprocess/1_get_fastq_files.sh`
+
+Retrieves .fastq files by passing in the `SraAccList.txt` from aforementioned step.
+
+`preprocess/2_run_fastQC.sh`
+
+Runs FastQC for all .fastq.gz files in a given directory.
+
+`preprocess/3_run_trim_galore.sh`
+
+Run Trim Galore! followed by FastQC to trim any reads.
+
+`preprocess/4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
+
+Run one or more of three aligners on .fastq data in a given directory. 
+
 Temporal expression analysis
 ==========
 
@@ -59,29 +84,6 @@ Plot alternative splicing genes within categories (all females, all males, femal
 
 Temporal protein-DNA analysis
 ==========
-
-### Preprocess Step
-#### Retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
-
-`preprocess/1_parse_sraRunTable.sh`
-
-Creates `time2splice/` folder structure. Creates `metadatafile.csv` and `SraAccList.txt` (which is needed for next command to get .fastq files).
-
-`preprocess/1_get_fastq_files.sh`
-
-Retrieves .fastq files by passing in the `SraAccList.txt` from aforementioned step.
-
-`preprocess/2_run_fastQC.sh`
-
-Runs FastQC for all .fastq.gz files in a given directory.
-
-`preprocess/3_run_trim_galore.sh`
-
-Run Trim Galore! followed by FastQC to trim any reads.
-
-`preprocess/4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
-
-Run one or more of three aligners on .fastq data in a given directory. 
 
 Temporal multi-omics integration
 ==========
