@@ -116,6 +116,9 @@ Generate signal track to profile transcription factor modification enrichment le
 
 Temporal multi-omics integration
 ==========
+
+Note, there is no order to these scripts. Each analysis / results exploration is independent. 
+
 `protein_dna/analysis/overlap_protein_DNA_peaks.sh`
 
 Runs Intervene to view intersection of each narrowpeak file.
