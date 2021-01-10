@@ -118,7 +118,7 @@ Temporal multi-omics integration (scripts/multio_analysis)
 
 Note, there is no order to these scripts. Each analysis / results exploration is independent. There are more analysis scripts to come.
 
-`multio_analysis/overlap_protein_DNA_peaks.sh`
+`overlap_protein_DNA_peaks.sh`
 
 Runs Intervene to view intersection of each narrowpeak file.
 
