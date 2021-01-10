@@ -15,7 +15,7 @@ Outline
 
   1. [Preprocess](#preprocess-scriptspreprocess)
   2. [Temporal expression analysis](#temporal-expression-analysis-scriptsrna)
-  3. [Temporal protein-DNA analysis](#temporal-protein-DNA-analysis)
+  3. [Temporal protein-DNA analysis](#temporal-protein-dna-analysis-scriptsprotein_dna)
   4. [Temporal multi-omics integration](#temporal-multi-omics-integration)
 
 Preprocess (scripts/preprocess)
