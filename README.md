@@ -12,10 +12,10 @@ Alternative splicing can occur in at least 3/4th of human genes to encode two or
 
 Outline
 ==========
-#### [Preprocess](#preprocess)
-#### Temporal expression analysis
-#### Temporal protein-DNA analysis
-#### Temporal multi-omics integration
+#### [Preprocess](#preprocess-1)
+#### [Temporal expression analysis](#temporal-expression-analysis)
+#### [Temporal protein-DNA analysis](#temporal-protein-DNA-analysis)
+#### [Temporal multi-omics integration](#temporal-multi-omics-integration)
 
 Preprocess
 ==========
