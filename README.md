@@ -114,7 +114,7 @@ Runs MACs2 for all .sorted.bam files in a given directory
 Generate signal track to profile transcription factor modification enrichment levels genome-wide.
 
 
-Temporal multi-omics integration
+Temporal multi-omics integration (scripts/multio_analysis)
 ==========
 
 Note, there is no order to these scripts. Each analysis / results exploration is independent. There are more analysis scripts to come.
