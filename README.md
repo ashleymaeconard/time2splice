@@ -13,10 +13,10 @@ Alternative splicing can occur in at least 3/4th of human genes to encode two or
 Outline
 ==========
 
-  1. [Preprocess](#preprocess-1)
-  2. [Temporal expression analysis](#temporal-expression-analysi-1)
-  3. [Temporal protein-DNA analysis](#temporal-protein-DNA-analysis-1)
-  4. [Temporal multi-omics integration](#temporal-multi-omics-integration-1)
+  1. [Preprocess](#preprocess)
+  2. [Temporal expression analysis](#temporal-expression-analysi)
+  3. [Temporal protein-DNA analysis](#temporal-protein-DNA-analysis)
+  4. [Temporal multi-omics integration](#temporal-multi-omics-integration)
 
 Preprocess
 ==========
@@ -42,6 +42,10 @@ Run Trim Galore! followed by FastQC to trim any reads.
 `preprocess/4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
 
 Run one or more of three aligners on .fastq data in a given directory. 
+
+`preprocess/5_plot_alignment.py`
+
+Plot the alignments from either one or two different aligners (Bowtie2 or HISAT2).
 
 Temporal expression analysis
 ==========
