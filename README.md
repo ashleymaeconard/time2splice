@@ -60,7 +60,8 @@ Plot alternative splicing genes within categories (all females, all males, femal
 Temporal protein-DNA analysis
 ==========
 
-### Preprocess Step: retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
+### Preprocess Step
+#### Retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
 
 `preprocess/1_parse_sraRunTable.sh`
 
