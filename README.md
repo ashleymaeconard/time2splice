@@ -107,12 +107,11 @@ Run Picard's MarkDuplicates in for all .sorted.bam files in a given directory
 
 `protein_dna/peak_calling/2_run_macs2.sh`
 
-Runs MACs2 for all .sorted.bam files in a given directory
+Runs MACS2 to call peaks for all .sorted.bam files in a given directory
 
 `protein_dna/peak_calling/3_run_macs2_fold_enrich.sh`
 
-Generate signal track to profile transcription factor modification enrichment levels genome-wide.
-
+Generate signal track using MACS2 to profile transcription factor modification enrichment levels genome-wide.
 
 Temporal multi-omics integration (scripts/multio_analysis)
 ==========
