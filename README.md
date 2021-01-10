@@ -17,7 +17,7 @@ Outline
 #### Temporal protein-DNA analysis
 #### Temporal multi-omics integration
 
-Preprocess Step
+Preprocess
 ==========
 
 ### Retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
