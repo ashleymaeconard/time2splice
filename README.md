@@ -118,19 +118,19 @@ Temporal multi-omics integration (scripts/multio_analysis)
 
 Note, there is no order to these scripts. Each analysis / results exploration is independent. There are more analysis scripts to come.
 
-`analysis/overlap_protein_DNA_peaks.sh`
+`multio_analysis/overlap_protein_DNA_peaks.sh`
 
 Runs Intervene to view intersection of each narrowpeak file.
 
-`analysis/histogram_peak_val_intensity.ipynb`
+`multio_analysis/histogram_peak_val_intensity.ipynb`
 
 Plot peak intensity for a given narrow peak file.
 
-`analysis/get_coord_run_meme.sh`
+`multio_analysis/get_coord_run_meme.sh`
 
 Get coordinates of bed file and run through MEME.
 
-`analysis/alt_splicing_chi_squared.ipynb`
+`multio_analysis/alt_splicing_chi_squared.ipynb`
 
 Perform chi-squared test on alternative splicing categories. Mutually Exclusive Exons (MXE) used in this example.
 
