@@ -23,31 +23,31 @@ Preprocess (scripts/preprocess)
 
 ### Retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
 
-`preprocess/1_parse_sraRunTable.sh`
+`1_parse_sraRunTable.sh`
 
 Creates `time2splice/` folder structure. Creates `metadatafile.csv` and `SraAccList.txt` (which is needed for next command to get .fastq files).
 
-`preprocess/1_get_fastq_files.sh`
+`1_get_fastq_files.sh`
 
 Retrieves .fastq files by passing in the `SraAccList.txt` from aforementioned step.
 
-`preprocess/2_run_fastQC.sh`
+`2_run_fastQC.sh`
 
 Runs FastQC for all .fastq.gz files in a given directory.
 
-`preprocess/3_run_trim_galore.sh`
+`3_run_trim_galore.sh`
 
 Run Trim Galore! followed by FastQC to trim any reads.
 
-`preprocess/3_merge_lines.sh`
+`3_merge_lines.sh`
 
 Merges the different lanes of the same flow cell fastq.gz files. 
 
-`preprocess/4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
+`4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
 
 Run one or more of three aligners on .fastq data in a given directory. 
 
-`preprocess/5_plot_alignment.py`
+`5_plot_alignment.py`
 
 Plot the alignments from either one or two different aligners (Bowtie2 or HISAT2).
 
@@ -101,15 +101,15 @@ Plot alternative splicing genes within categories (all females, all males, femal
 Temporal protein-DNA analysis (scripts/protein_dna/)
 ==========
 
-`protein_dna/1_run_picard_markduplicates.sh`
+`1_run_picard_markduplicates.sh`
 
 Run Picard's MarkDuplicates in for all .sorted.bam files in a given directory.
 
-`protein_dna/2_run_macs2.sh`
+`2_run_macs2.sh`
 
 Runs MACS2 to call peaks for all .sorted.bam files in a given directory.
 
-`protein_dna/3_run_macs2_fold_enrich.sh`
+`3_run_macs2_fold_enrich.sh`
 
 Generate signal track using MACS2 to profile transcription factor modification enrichment levels genome-wide.
 
@@ -122,15 +122,15 @@ Note, there is no order to these scripts. Each analysis / results exploration is
 
 Runs Intervene to view intersection of each narrowpeak file.
 
-`multio_analysis/histogram_peak_val_intensity.ipynb`
+`histogram_peak_val_intensity.ipynb`
 
 Plot peak intensity for a given narrow peak file.
 
-`multio_analysis/get_coord_run_meme.sh`
+`get_coord_run_meme.sh`
 
 Get coordinates of bed file and run through MEME.
 
-`multio_analysis/alt_splicing_chi_squared.ipynb`
+`alt_splicing_chi_squared.ipynb`
 
 Perform chi-squared test on alternative splicing categories. Mutually Exclusive Exons (MXE) used in this example.
 
