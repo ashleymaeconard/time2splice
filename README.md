@@ -127,3 +127,8 @@ Runs Intervene to view intersection of each narrowpeak file.
 
 Plot peak intensity for a given narrow peak file.
 
+`protein_dna/analysis/get_coord_run_meme.sh`
+
+Get coordinates of bed file and run through MEME.
+
+
