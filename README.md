@@ -123,4 +123,7 @@ Note, there is no order to these scripts. Each analysis / results exploration is
 
 Runs Intervene to view intersection of each narrowpeak file.
 
+`protein_dna/analysis/histogram_peak_val_intensity.ipynb`
+
+Plot peak intensity for a given narrow peak file.
 
