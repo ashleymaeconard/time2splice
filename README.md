@@ -10,10 +10,17 @@ Alternative splicing can occur in at least 3/4th of human genes to encode two or
 
 **NOTE: Snakemake coming soon to use time2splice efficiently.**
 
+Outline
+==========
+#### Preprocess
+#### Temporal expression analysis
+#### Temporal protein-DNA analysis
+#### Temporal multi-omics integration
+
 Preprocess Step
 ==========
 
-## Retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
+### Retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
 
 `preprocess/1_parse_sraRunTable.sh`
 
