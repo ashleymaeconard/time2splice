@@ -117,7 +117,7 @@ Generate signal track to profile transcription factor modification enrichment le
 Temporal multi-omics integration
 ==========
 
-Note, there is no order to these scripts. Each analysis / results exploration is independent. 
+Note, there is no order to these scripts. Each analysis / results exploration is independent. There are more analysis scripts to come.
 
 `protein_dna/analysis/overlap_protein_DNA_peaks.sh`
 
@@ -130,5 +130,10 @@ Plot peak intensity for a given narrow peak file.
 `protein_dna/analysis/get_coord_run_meme.sh`
 
 Get coordinates of bed file and run through MEME.
+
+`protein_dna/analysis/alt_splicing_chi_squared.ipynb`
+
+Perform chi-squared test on alternative splicing categories. Mutually Exclusive Exons (MXE) used in this example.
+
 
 
