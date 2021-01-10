@@ -18,7 +18,7 @@ Outline
   3. [Temporal protein-DNA analysis](#temporal-protein-DNA-analysis)
   4. [Temporal multi-omics integration](#temporal-multi-omics-integration)
 
-Preprocess
+Preprocess (scripts/preprocess)
 ==========
 
 ### Retrieve raw data, quality control, trimming, alignment. Perform steps as needed.
@@ -39,6 +39,10 @@ Runs FastQC for all .fastq.gz files in a given directory.
 
 Run Trim Galore! followed by FastQC to trim any reads.
 
+`preprocess/3_merge_lines.sh`
+
+Merges the different lanes of the same flow cell fastq.gz files. 
+
 `preprocess/4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
 
 Run one or more of three aligners on .fastq data in a given directory. 
@@ -47,7 +51,7 @@ Run one or more of three aligners on .fastq data in a given directory.
 
 Plot the alignments from either one or two different aligners (Bowtie2 or HISAT2).
 
-Temporal expression analysis
+Temporal expression analysis (scripts/rna)
 ==========
 
 `1_run_salmon.sh`
@@ -94,8 +98,20 @@ Alternative code base to plot transcript expression using PSI and DTU measures.
 
 Plot alternative splicing genes within categories (all females, all males, females sex specific, male sex specific, female all rest, male all rest, female non-sex specific, male non-sex specific, female new sex specific, male new sex specific) over time.
 
-Temporal protein-DNA analysis
+Temporal protein-DNA analysis (scripts/protein_dna/)
 ==========
+
+`protein_dna/peak_calling/1_run_picard_markduplicates.sh`
+
+Run Picard's MarkDuplicates in for all .sorted.bam files in a given directory
+
+`protein_dna/peak_calling/2_run_macs2.sh`
+
+Runs MACs2 for all .sorted.bam files in a given directory
+
+`protein_dna/peak_calling/3_run_macs2_fold_enrich.sh`
+
+Generate signal track to profile transcription factor modification enrichment levels genome-wide.
 
 
 Temporal multi-omics integration
