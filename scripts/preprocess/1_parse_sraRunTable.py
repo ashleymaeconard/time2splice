@@ -2,8 +2,8 @@
 # parse_sraRunTable.py
 # Last Mod. October 23, 2019
 # Purpose: 1) create time2splice/ folder structure
-#		 2) create SraAccList.txt
-# 		 3) create metadatafile.csv
+#          2) create SraAccList.txt
+# 	   3) create metadatafile.csv
 
 import sys, os, csv, glob, re
 import pandas as pd
