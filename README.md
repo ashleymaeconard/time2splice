@@ -116,7 +116,7 @@ Generate signal track using MACS2 to profile transcription factor modification e
 Temporal multi-omics integration (scripts/multio_analysis)
 ==========
 
-Note, there is no order to these scripts. Each analysis / results exploration is independent. There are more analysis scripts to come.
+Note, there is no order to these scripts. Each analysis / results exploration is independent. More analysis scripts to come.
 
 `overlap_protein_DNA_peaks.sh`
 
