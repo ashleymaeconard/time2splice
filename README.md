@@ -8,7 +8,7 @@ Motivation
 ==========
 Alternative splicing can occur in at least 3/4th of human genes to encode two or more splice isoforms, and these isoforms occur in different proportions over time, and between sexes. Thus, we present a method to characterize these isoforms, so to better understand gene regulation happening in normal and diseased states. Time2splice identifies temporal and sex-specific alternative splicing combinding multi-omic (i.e. both expression via RNA-seq, and protein-DNA interaction via CUT&RUN and ChIP-seq) data. Analysis is done in 3 parts. 1) Temporal expression analysis, 2) Temporal protein-DNA analysis, and 3) Temporal multi-omics integration.
 
-**NOTE: Snakemake coming soon to use time2splice efficiently.**
+**NOTE: Snakemake coming soon to use time2splice more efficiently.**
 
 Outline
 ==========
@@ -98,7 +98,7 @@ Alternative code base to plot transcript expression using PSI and DTU measures.
 
 Plot alternative splicing genes within categories (all females, all males, females sex specific, male sex specific, female all rest, male all rest, female non-sex specific, male non-sex specific, female new sex specific, male new sex specific) over time.
 
-Temporal protein-DNA analysis (scripts/protein_dna/)
+Temporal protein-DNA analysis (scripts/protein_dna)
 ==========
 
 `1_run_picard_markduplicates.sh`
