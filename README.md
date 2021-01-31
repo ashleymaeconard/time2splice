@@ -1,6 +1,6 @@
 <img src="https://github.com/ashleymaeconard/time2splice/blob/master/img/time2splice_logo.png" width="100%">
 
-### A method to identify temporal and sex-specific alternative splicing from multi-omics data
+### A method to identify temporal and sex-specific alternative splicing from multi-omics data.
 
 ####  Author: Ashley Mae Conard
 
