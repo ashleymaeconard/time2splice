@@ -29,11 +29,11 @@ Creates `time2splice/` folder structure. Creates `metadatafile.csv` and `SraAccL
 
 `1_get_fastq_files.sh`
 
-Retrieves .fastq files by passing in the `SraAccList.txt` from aforementioned step.
+Retrieves .fastq files by passing in `SraAccList.txt` from aforementioned step.
 
 `2_run_fastQC.sh`
 
-Runs FastQC for all .fastq.gz files in a given directory.
+Runs FastQC for all .fastq files in a given directory.
 
 `3_run_trim_galore.sh`
 
@@ -41,7 +41,7 @@ Run Trim Galore! followed by FastQC to trim any reads.
 
 `3_merge_lines.sh`
 
-Merges the different lanes of the same flow cell fastq.gz files. 
+Merges the different lanes of the same flow cell .fastq files. 
 
 `4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
 
