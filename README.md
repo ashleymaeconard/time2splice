@@ -25,7 +25,7 @@ Preprocess (scripts/preprocess)
 
 `1_parse_sraRunTable.sh`
 
-Creates `time2splice/` folder structure. Creates `metadatafile.csv` and `SraAccList.txt` (which is needed for next command to get .fastq files).
+Creates `time2splice/` folder structure, as well as `metadatafile.csv` and `SraAccList.txt` (which is needed for next command to get .fastq files).
 
 `1_get_fastq_files.sh`
 
@@ -37,15 +37,15 @@ Runs FastQC for all .fastq files in a given directory.
 
 `3_run_trim_galore.sh`
 
-Run Trim Galore! followed by FastQC to trim any reads.
+Run Trim Galore! followed by FastQC to trim any reads below quality threshold.
 
 `3_merge_lines.sh`
 
-Merges the different lanes of the same flow cell .fastq files. 
+Merges all the different lanes of the same flow cell .fastq files. 
 
 `4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
 
-Run one or more of three aligners on .fastq data in a given directory. 
+Runs one or more of these three aligners (Bowtie2, BWA, or HISAT2) on .fastq data in a given directory. 
 
 `5_plot_alignment.py`
 
