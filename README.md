@@ -12,7 +12,7 @@ Alternative splicing can occur in at least 3/4th of human genes to encode two or
 
 Paper
 ==========
-"Sex-specific transcript diversity is regulated by a maternal pioneer factor in early Drosophila embryos. Mukulika Ray*, Ashley Mae Conard*, Jennifer Urban, Erica Larschan"
+"Sex-specific transcript diversity is regulated by a maternal pioneer factor in early Drosophila embryos". Mukulika Ray*, Ashley Mae Conard*, Jennifer Urban, Erica Larschan
 *contributed equally
 
 Outline
