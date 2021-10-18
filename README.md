@@ -1,14 +1,20 @@
 <img src="https://github.com/ashleymaeconard/time2splice/blob/master/img/time2splice_logo.png" width="100%">
 
-### A method to identify temporal and sex-specific alternative splicing from multi-omics data
+### A method to identify temporal and sex-specific alternative splicing from multi-omics data.
 
 ####  Author: Ashley Mae Conard
 
 Motivation
 ==========
-Alternative splicing can occur in at least 3/4th of human genes to encode two or more splice isoforms, and these isoforms occur in different proportions over time, and between sexes. Thus, we present a method to characterize these isoforms, so to better understand gene regulation happening in normal and diseased states. Time2splice identifies temporal and sex-specific alternative splicing combinding multi-omic (i.e. both expression via RNA-seq, and protein-DNA interaction via CUT&RUN and ChIP-seq) data. Analysis is done in 3 parts. 1) Temporal expression analysis, 2) Temporal protein-DNA analysis, and 3) Temporal multi-omics integration.
+Alternative splicing can occur in at least 3/4th of human genes to encode two or more splice isoforms. These isoforms occur in different proportions over time, and between sexes. Thus, we present a method to characterize these isoforms, so to better understand gene regulation happening in normal and diseased states. Time2splice identifies temporal and sex-specific alternative splicing combinding multi-omic (i.e. both expression via RNA-seq, and protein-DNA interaction via CUT&RUN and ChIP-seq) data. Analysis is done in 3 parts. 1) Temporal expression analysis, 2) Temporal protein-DNA analysis, and 3) Temporal multi-omics integration.
 
-**NOTE: Snakemake coming soon to use time2splice efficiently.**
+**NOTE: Snakemake pipeline coming soon for time2splice!**
+
+Paper
+==========
+Ray*, M., Conard*, A. M., Urban, J., & Larschan, E. (2021). Sex-specific transcript diversity is regulated by a maternal pioneer factor in early Drosophila embryos. bioRxiv.
+
+*contributed equally
 
 Outline
 ==========
@@ -25,27 +31,27 @@ Preprocess (scripts/preprocess)
 
 `1_parse_sraRunTable.sh`
 
-Creates `time2splice/` folder structure. Creates `metadatafile.csv` and `SraAccList.txt` (which is needed for next command to get .fastq files).
+Creates `time2splice/` folder structure, as well as `metadatafile.csv` and `SraAccList.txt` (which is needed for next command to get .fastq files).
 
 `1_get_fastq_files.sh`
 
-Retrieves .fastq files by passing in the `SraAccList.txt` from aforementioned step.
+Retrieves .fastq files by passing in `SraAccList.txt` from aforementioned step.
 
 `2_run_fastQC.sh`
 
-Runs FastQC for all .fastq.gz files in a given directory.
+Runs FastQC for all .fastq files in a given directory.
 
 `3_run_trim_galore.sh`
 
-Run Trim Galore! followed by FastQC to trim any reads.
+Run Trim Galore! followed by FastQC to trim any reads below quality threshold.
 
 `3_merge_lines.sh`
 
-Merges the different lanes of the same flow cell fastq.gz files. 
+Merges all the different lanes of the same flow cell .fastq files. 
 
 `4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
 
-Run one or more of three aligners on .fastq data in a given directory. 
+Runs one or more of these three aligners (Bowtie2, BWA, or HISAT2) on .fastq data in a given directory. 
 
 `5_plot_alignment.py`
 
@@ -98,7 +104,7 @@ Alternative code base to plot transcript expression using PSI and DTU measures.
 
 Plot alternative splicing genes within categories (all females, all males, females sex specific, male sex specific, female all rest, male all rest, female non-sex specific, male non-sex specific, female new sex specific, male new sex specific) over time.
 
-Temporal protein-DNA analysis (scripts/protein_dna/)
+Temporal protein-DNA analysis (scripts/protein_dna)
 ==========
 
 `1_run_picard_markduplicates.sh`
