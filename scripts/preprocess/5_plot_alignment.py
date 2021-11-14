@@ -10,7 +10,6 @@ import seaborn as sns
 import glob, sys
 import re, os
 import pandas as pd
-from matplotlib import pyplot
 import matplotlib
 import matplotlib.pyplot as plt 
 
