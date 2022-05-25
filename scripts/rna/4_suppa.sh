@@ -5,7 +5,11 @@
 # Purpose: Run various variants of Suppa to to identify differential splicing.
 
 if [ $# -lt 2 ]; then
-	echo $0: "Usage: ./4_suppa.sh /PATH/TO/FOLDER/ (e.g. merged_2-4_cf_cm) COL_BEGINNING (e.g. 2-4_cf_cm)"
+	echo $0: "Usage: ./4_suppa.sh 
+				1) /PATH/TO/FOLDER/ (e.g. merged_2-4_cf_cm) 
+				2) COL_BEGINNING (e.g. 2-4_cf_cm)
+				3) /PATH/TO/SUPPA/DIR"
+
 	exit 1
 fi
 
