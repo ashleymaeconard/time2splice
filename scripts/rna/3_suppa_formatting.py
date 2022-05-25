@@ -74,7 +74,7 @@ def read_nm_fb_map(DM6_NM_FB):
     print(dict(list(dict_n_f.items())[0:2]))
     return dict_n_f
 
-def remapping_NM_to_FBtr(df_merged_iso_tpms, DM6_NM_FB_MAP):
+def remapping_NM_to_FBtr(df_merged_iso_tpms, DM6_NM_FB_MAP, OUTPUTDIR):
     
     # Adding flybase ID to df
     dict_nm_fb = read_nm_fb_map(DM6_NM_FB_MAP)
@@ -216,7 +216,7 @@ def main(args):
         os.makedirs(OUTPUTDIR)
 
     df_final_1 = reformat_merge_iso_tpm(INPUTDIR, TIMEPOINT, SEX, CONTROLS_ONLY)
-    df_final_2 = remapping_NM_to_FBtr(df_final_1, DM6_NM_FB_MAP)
+    df_final_2 = remapping_NM_to_FBtr(df_final_1, DM6_NM_FB_MAP, OUTPUTDIR)
     #df_final_2 = adding_flybase_IDs(df_final_1, DM6_NM_FB_MAP)
     df_final_2.to_csv(OUTPUTDIR+"iso_tpm_merged.txt",sep="\t")
 
