@@ -19,6 +19,18 @@ Ray*, M., Conard*, A. M., Urban, J., & Larschan, E. (2021). Sex-specific transcr
 
 *contributed equally
 
+Installation
+==========
+  1. Clone repo
+        ```
+        git clone https://github.com/ashleymaeconard/time2splice.git 
+        ``` 
+  2. In the time2splice directory, build conda environment
+      ```
+      conda env create --name time2splice --file=time2splice.yml
+      ```
+  3. Install reference and other data files [here](https://drive.google.com/drive/folders/1EamlOrKQdzGMY3DoVVwmd23v8NdtAIbV?usp=sharing). We suggest placing them in `time2splice/data/`.
+
 Outline
 ==========
 
