@@ -8,6 +8,9 @@ Motivation
 ==========
 Alternative splicing can occur in at least 3/4th of human genes to encode two or more splice isoforms. These isoforms occur in different proportions over time, and between sexes. Thus, we present a method to characterize these isoforms, so to better understand gene regulation happening in normal and diseased states. Time2splice identifies temporal and sex-specific alternative splicing combinding multi-omic (i.e. both expression via RNA-seq, and protein-DNA interaction via CUT&RUN and ChIP-seq) data. Analysis is done in 3 parts. 1) Temporal expression analysis, 2) Temporal protein-DNA analysis, and 3) Temporal multi-omics integration.
 
+
+<img src="https://github.com/ashleymaeconard/time2splice/blob/master/img/time2splice_diagram.png" width="100%">
+
 **NOTE: Snakemake pipeline coming soon for time2splice!**
 
 Paper
@@ -51,7 +54,7 @@ Merges all the different lanes of the same flow cell .fastq files.
 
 `4_run_Bowtie2.sh` or `preprocess/4_run_BWA.sh` or `preprocess/4_run_HISAT2.sh`. 
 
-Runs one or more of these three aligners (Bowtie2, BWA, or HISAT2) on .fastq data in a given directory. 
+Run one or more of these three aligners (Bowtie2, BWA, or HISAT2) on .fastq data in a given directory. 
 
 `5_plot_alignment.py`
 
@@ -62,13 +65,13 @@ Temporal expression analysis (scripts/rna)
 
 `1_run_salmon.sh`
 
-Run salmon to quantify transcript expression for treatment and control samples.
+Run salmon to quantify transcript expression for case and control samples.
 
 e.g. `./1_run_salmon.sh /nbu/compbio/aconard/larschan_data/sexed_embryo/ /data/compbio/aconard/splicing/results/salmon_results_ncbi_trans/ /data/compbio/aconard/BDGP6/transcriptome_dir/pub/infphilo/hisat2/data/bdgp6_tran/genome.fa 3 10 1 _001.fastq.gz` 
 
 `2_run_suppa.sh`
 
-Run Suppa for treatment and control samples.
+Run Suppa for differential splicing analysis of case and control samples.
 
 e.g. `./2_run_suppa.sh /data/compbio/aconard/splicing/results/salmon_results/ /data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/ /data/compbio/aconard/BDGP6/transcriptome_dir/pub/infphilo/hisat2/data/bdgp6_tran/genome.fa 20`
 
@@ -86,7 +89,7 @@ Calculate and plot the proportions of alternative splicing (in pie chart) in con
 
 `6_calc_total_alt_differential_splicing.py`
 
-Calculate and plot the proportions of alternative splicing (in pie chart) in treatment samples.
+Calculate and plot the proportions of alternative splicing (in pie chart) in case samples.
 
 `7_get_bias_genes.py`
 
@@ -113,7 +116,7 @@ Run Picard's MarkDuplicates in for all .sorted.bam files in a given directory.
 
 `2_run_macs2.sh`
 
-Runs MACS2 to call peaks for all .sorted.bam files in a given directory.
+Run MACS2 to call peaks for all .sorted.bam files in a given directory.
 
 `3_run_macs2_fold_enrich.sh`
 
@@ -126,19 +129,22 @@ Note, there is no order to these scripts. Each analysis / results exploration is
 
 `overlap_protein_DNA_peaks.sh`
 
-Runs Intervene to view intersection of each narrowpeak file.
+Run Intervene to view intersection of each narrowpeak file.
 
-`histogram_peak_val_intensity.ipynb`
+`enrichment_analysis.r`
 
-Plot peak intensity for a given narrow peak file.
+Perform gene ontology and gene set enrichment analysis given a list of genes.
 
 `get_coord_run_meme.sh`
 
 Get coordinates of bed file and run through MEME.
 
+`histogram_peak_val_intensity.ipynb`
+
+Plot peak intensity for a given narrow peak file.
+
 `alt_splicing_chi_squared.ipynb`
 
 Perform chi-squared test on alternative splicing categories. Mutually Exclusive Exons (MXE) used in this example.
-
 
 
