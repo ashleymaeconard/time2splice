@@ -225,10 +225,10 @@ if __name__ == "__main__":
     parser.add_argument("-t", "--time-point", nargs='?', default=0, type=str) # experiment timepoint (could be 0, signifying none, or e.g. "2-4")
     parser.add_argument("--controls-only", default=0, type=int, help="1 if controls only, 0 otherwise. Default is 0.")
 
-    parser.add_argument("--inputdir", type=str) # e.g. "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/"
-    parser.add_argument("--outputdir", type=str) #e.g. "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/merged_2-4_cf_cm/"
-    parser.add_argument("--sex", type=str, help="m or f")
-    parser.add_argument("--map", type=str, help="map from DM6, NM and FB (e.g. see BDGP6's fbtr_refseq.tsv file, could be less or more recent than dm6)")
+    parser.add_argument("inputdir", type=str) # e.g. "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/"
+    parser.add_argument("outputdir", type=str) #e.g. "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/merged_2-4_cf_cm/"
+    parser.add_argument("sex", type=str, help="m or f")
+    parser.add_argument("map", type=str, help="map from DM6, NM and FB (e.g. see BDGP6's fbtr_refseq.tsv file, could be less or more recent than dm6)")
     
     args = parser.parse_args()
     
