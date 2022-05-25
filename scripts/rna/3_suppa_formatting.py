@@ -205,7 +205,7 @@ def plot_NaN_fraction(df2):
 def main(args):
     """Formatting SUPPA arguments."""
     INPUTDIR = args.inputdir 
-    TIMEPOINT = args.timepoint
+    TIMEPOINT = args.time_point
     SEX = args.sex
     OUTPUTDIR = args.outputdir
     CONTROLS_ONLY = args.controls_only
