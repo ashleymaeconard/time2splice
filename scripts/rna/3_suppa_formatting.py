@@ -17,16 +17,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from biothings_client import get_client
 
-# Arguments
-INPUTDIR = "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/"
-OUTPUTDIR = "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/merged_2-4_cf_cm/"
-TIMEPOINT = "2-4" # make sure it is part of folder name - e.g. 0-2 or 2-4
-SEX = "m"
-CONTROLS_ONLY = 1
-DM6_NM_FB_MAP = "/data/compbio/aconard/BDGP6/fbtr_refseq.tsv"
-if not os.path.exists(OUTPUTDIR):
-    os.makedirs(OUTPUTDIR)
-
 def plot_NaN(filename, df3):
     # Total number of NaNs when converting gene IDs
     list_nans=[len(df3), df3["ensembl.gene"].isna().sum(), df3["reporter.DroGene-1_0"].isna().sum(), 
@@ -83,7 +73,7 @@ def read_nm_fb_map(DM6_NM_FB):
     print(dict(list(dict_n_f.items())[0:2]))
     return dict_n_f
 
-def remapping_NM_to_FBtr(df_merged_iso_tpms):
+def remapping_NM_to_FBtr(df_merged_iso_tpms, DM6_NM_FB_MAP):
     
     # Adding flybase ID to df
     dict_nm_fb = read_nm_fb_map(DM6_NM_FB_MAP)
@@ -115,7 +105,7 @@ def remapping_NM_to_FBtr(df_merged_iso_tpms):
     
     return df_merged_iso_tpms
 
-def reformat_merge_iso_tpm():
+def reformat_merge_iso_tpm(INPUTDIR, TIMEPOINT, SEX, CONTROLS_ONLY):
     dict_samples_reps={}  
     converted_first_replicate=0
     
@@ -162,7 +152,7 @@ def reformat_merge_iso_tpm():
                         #print("Merged dfs: \n", df_merged_iso_tpms.head())
     return df_merged_iso_tpms1
 
-def adding_flybase_IDs(df_merged_iso_tpms):
+def adding_flybase_IDs(df_merged_iso_tpms, DM6_NM_FB_MAP):
     # Adding flybase ID to df
     dict_nm_fb = read_nm_fb_map(DM6_NM_FB_MAP)
     df_merged = convert_nm_ids_to_flybase(df_merged_iso_tpms)
@@ -211,13 +201,34 @@ def plot_NaN_fraction(df2):
 
     plt.show()
 
-def main():
-    if __name__=="__main__":
-        df_final_1 = reformat_merge_iso_tpm()
-        #print(df_final_1)
-        df_final_2 = remapping_NM_to_FBtr(df_final_1)
-        #df_final_2 = adding_flybase_IDs(df_final_1)
-        df_final_2.to_csv(OUTPUTDIR+"iso_tpm_merged.txt",sep="\t")
-        
-main()
+def main(args):
+    """Formatting SUPPA arguments."""
+    INPUTDIR = args.inputdir 
+    TIMEPOINT = args.timepoint
+    SEX = args.sex
+    OUTPUTDIR = args.outputdir
+    CONTROLS_ONLY = args.controls_only
+    DM6_NM_FB_MAP = args.map
 
+    # Create output dir if needed
+    if not os.path.exists(OUTPUTDIR):
+        os.makedirs(OUTPUTDIR)
+
+    df_final_1 = reformat_merge_iso_tpm(INPUTDIR, TIMEPOINT, SEX, CONTROLS_ONLY)
+    df_final_2 = remapping_NM_to_FBtr(df_final_1, DM6_NM_FB_MAP)
+    #df_final_2 = adding_flybase_IDs(df_final_1, DM6_NM_FB_MAP)
+    df_final_2.to_csv(OUTPUTDIR+"iso_tpm_merged.txt",sep="\t")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Format SUPPA")
+    parser.add_argument("-t", "--time-point", nargs='?', default=0, type=str) # experiment timepoint (could be 0, signifying none, or e.g. "2-4")
+    parser.add_argument("--controls-only", default=0, type=int, help="1 if controls only, 0 otherwise. Default is 0.")
+
+    parser.add_argument("--inputdir", nargs='?', type=int) # e.g. "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/"
+    parser.add_argument("--outdir", type=str) #e.g. "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/merged_2-4_cf_cm/"
+    parser.add_argument("--sex", type=str, help="m or f")
+    parser.add_argument("--map", type=str, help="map from DM6, NM and FB (e.g. see BDGP6's fbtr_refseq.tsv file, could be less or more recent than dm6)")
+    
+    args = parser.parse_args()
+    
+    main(args)
