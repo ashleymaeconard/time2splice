@@ -93,7 +93,7 @@ Converts NM_ gene names to flybase name, then merging outputs from run_suppa (NM
 
 `4_suppa.sh`
 
-Identifies various forms of differential splicing (e.g. using PSI and DTU). NOTE: ensure that your column names are of the following format: TREATMENT.REP and CONTROL.REP. Examples for 2 replicates and CLAMP RNAi could be: `clampRNAi.1, clampRNAi.2, control.1, control.2`.
+Identifies various forms of differential splicing (e.g. using PSI and DTU). NOTE: ensure that your column names are of the following format: TREATMENT.REP and CONTROL.REP. Examples for 2 replicates and 0-2 timepoint CLAMP RNAi could be: `0-2clampRNAi.1, 0-2clampRNAi.2, 0-2control.1, 0-2control.2`.
 
 `5_calc_total_alt_splicing_controls.py`
 
