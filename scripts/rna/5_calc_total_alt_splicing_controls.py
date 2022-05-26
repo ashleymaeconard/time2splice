@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def calc_tot_alt_splicing_controls(INPUTFILE, TWO_CATE):
+def calc_tot_alt_splicing_controls(INPUTFILE):
 
     # Read csv
     df_events = pd.read_csv(INPUTFILE,sep="\t+|;", engine='python')
@@ -57,7 +57,7 @@ def calc_tot_alt_splicing_controls(INPUTFILE, TWO_CATE):
 def main(args):
     INPUTFILE = args.input_file 
 
-    calc_tot_alt_splicing_controls(INPUTFILE, TWO_CATE)
+    calc_tot_alt_splicing_controls(INPUTFILE)
     #df_final_2.to_csv(OUTPUTDIR+"iso_tpm_merged.txt",sep="\t")
 
 if __name__ == "__main__":
