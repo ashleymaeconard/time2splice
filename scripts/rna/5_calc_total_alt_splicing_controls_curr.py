@@ -25,7 +25,7 @@ def calc_tot_alt_splicing_controls(INPUTFILE, OUTDIR, OUTFILENAME):
     df_events = pd.read_csv(INPUTFILE,sep="\t+|;", engine='python')
 
     # Import events
-    df_1event_1cat = df_events.iloc[:, : 4].dropna().loc[(df_events.sum(axis=1) != 0)]
+    df_1event_1cat = df_events.dropna().loc[(df_events.sum(axis=1) != 0)]
     df_1event_1cat = df_1event_1cat.reset_index()
     df_1event_1cat = df_1event_1cat.rename(columns={"level_0": "gene_id", "level_1": "AS"})
     df_1event_1cat['event_type'] = df_1event_1cat['AS'].apply(lambda x: x[0:2])
