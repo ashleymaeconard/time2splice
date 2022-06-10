@@ -33,7 +33,7 @@ def calc_tot_alt_splicing_controls(INPUTFILE, OUTDIR, OUTFILENAME):
 
     # Plotting fractions of alternative splicing
     events_list = ["SE","A5","A3","MX","RI","AF","AL"]
-    ee_experiments = [("df_1event_1cat", df_1event_1cat_num_AS_events)]
+    ee_experiments = [("df_1event_1cat", df_1event_1cat_num_AS_events)] # todo: do not need forloop given new factoring
     for df_name, df_time_sex_events in ee_experiments:
         list_evs = []
         list_evs_name = []
@@ -59,7 +59,7 @@ def main(args):
     #df_final_2.to_csv(OUTPUTDIR+"iso_tpm_merged.txt",sep="\t")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Calculate and plot proportions of alternative splicing (in pie chart) in control samples. <!> NOTE: Run this for every timepoint and condition separately.<!>")
+    parser = argparse.ArgumentParser(description="Calculate and plot proportions of alternative splicing (in pie chart) in samples. <!> NOTE: Run this for every timepoint and condition separately.<!>")
     parser.add_argument("input_file", type=str, help="Use events.psi generated in previous step. (e.g. ./results/suppa_results_ncbi_trans/merged_0-2_f/control_iso_events.psi)") 
     parser.add_argument("output_dir", type=str, help="Choose output directory location") 
     parser.add_argument("output_file_name", type=str, help="Choose output file name.") 
