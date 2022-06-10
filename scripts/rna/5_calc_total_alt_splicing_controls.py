@@ -31,26 +31,21 @@ def calc_tot_alt_splicing_controls(INPUTFILE, OUTDIR, OUTFILENAME):
     df_1event_1cat['event_type'] = df_1event_1cat['AS'].apply(lambda x: x[0:2])
     df_1event_1cat_num_AS_events= df_1event_1cat.groupby(['gene_id', 'event_type']).size().reset_index(name='num_events')
 
-    print(df_1event_1cat_num_AS_events.head(10))
-
     # Plotting fractions of alternative splicing
     events_list = ["SE","A5","A3","MX","RI","AF","AL"]
     ee_experiments = [("df_1event_1cat", df_1event_1cat_num_AS_events)]
     for df_name, df_time_sex_events in ee_experiments:
-        print("df_time_sex: ", df_name)
         list_evs = []
         list_evs_name = []
         for ev in events_list:
             list_evs_name.append(ev) 
             list_evs.append(df_time_sex_events[df_time_sex_events["event_type"]== ev]["num_events"].sum())
-        print(list_evs_name)
-        print(list_evs, sum(list_evs), 66927-sum(list_evs))
-
-    labels = ['SE', 'A5SS', 'A3SS', 'MXE','RI']
-    sizes = [1703, 1918, 1701, 1519, 1060]
+        print("Plotting %s with events:\n"%(OUTFILENAME), list_evs_name)
+        print(list_evs, " Total events: ", sum(list_evs))
+        
     colors = ['red', 'yellowgreen', 'lime', 'blue','purple','yellow','orange']
-    patches, texts = plt.pie(sizes, colors=colors, shadow=True, startangle=90)
-    plt.legend(patches, labels, loc="best")
+    patches, texts = plt.pie(list_evs, colors=colors, shadow=True, startangle=90)
+    plt.legend(patches, list_evs_name, loc="best")
     plt.axis('equal')
     plt.tight_layout()
     plt.savefig(OUTDIR+"/"+OUTFILENAME+"_piechart.png")
@@ -65,9 +60,9 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Calculate and plot proportions of alternative splicing (in pie chart) in control samples. <!> NOTE: Run this for every timepoint and condition separately.<!>")
-    parser.add_argument("input-file", type=str, help="Use events.psi generated in previous step. (e.g. ./results/suppa_results_ncbi_trans/merged_0-2_f/control_iso_events.psi)") 
-    parser.add_argument("output-dir", type=str, help="Choose output directory location") 
-    parser.add_argument("output-file-name", type=str, help="Choose output file name.") 
+    parser.add_argument("input_file", type=str, help="Use events.psi generated in previous step. (e.g. ./results/suppa_results_ncbi_trans/merged_0-2_f/control_iso_events.psi)") 
+    parser.add_argument("output_dir", type=str, help="Choose output directory location") 
+    parser.add_argument("output_file_name", type=str, help="Choose output file name.") 
     args = parser.parse_args()
     
     main(args)
