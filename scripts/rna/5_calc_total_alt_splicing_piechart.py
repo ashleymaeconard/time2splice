@@ -59,7 +59,7 @@ def main(args):
     #df_final_2.to_csv(OUTPUTDIR+"iso_tpm_merged.txt",sep="\t")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Calculate and plot proportions of alternative splicing (in pie chart) in control samples. <!> NOTE: Run this for every timepoint and condition separately.<!>")
+    parser = argparse.ArgumentParser(description="Calculate and plot proportions of alternative splicing (in pie chart) in samples. <!> NOTE: Run this for every timepoint and condition separately.<!>")
     parser.add_argument("input_file", type=str, help="Use events.psi generated in previous step. (e.g. ./results/suppa_results_ncbi_trans/merged_0-2_f/control_iso_events.psi)") 
     parser.add_argument("output_dir", type=str, help="Choose output directory location") 
     parser.add_argument("output_file_name", type=str, help="Choose output file name.") 
