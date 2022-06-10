@@ -13,7 +13,7 @@ from scipy import stats
 import seaborn as sns
 from io import StringIO
 import matplotlib.pyplot as plt; plt.rcdefaults()
-get_ipython().run_line_magic('matplotlib', 'inline')
+#get_ipython().run_line_magic('matplotlib', 'inline')
 from matplotlib_venn import venn2
 import matplotlib.pyplot as plt
 import numpy as np
