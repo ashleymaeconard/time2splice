@@ -95,19 +95,15 @@ Converts NM_ gene names to flybase name, then merging outputs from run_suppa (NM
 
 Identifies various forms of differential splicing (e.g. using PSI and DTU). NOTE: ensure that your column names have a treatment and control name differentiator of the following format: TREATMENT.REP and CONTROL.REP. Examples for 2 replicates and 0-2 timepoint *clamp* RNAi could be: `0-2clampNull.1, 0-2clampNull.2, 0-2rescue.1, 0-2rescue.2`.
 
-`5_calc_total_alt_splicing_controls.py`
+`5_calc_total_alt_splicing.py`
 
-Calculate and plot the proportions of alternative splicing (in pie chart) in control samples.
+Calculate and plot proportions of alternative splicing (in pie chart) in samples. <!> NOTE: Run this for every timepoint and condition separately.<!>
 
-`6_calc_total_alt_differential_splicing.py`
+`6_get_bias_genes.py`
 
-Calculate and plot the proportions of alternative splicing (in pie chart) in case samples.
+Find bias genes using control samples. <!> NOTE: Run this for every group pairs (2 only) comparison separately (e.g. females vs. males, females time 1 vs. females time 2, etc.) <!>
 
-`7_get_bias_genes.py`
-
-Retrieve male and female biased genes and create bed files for average profile plotting.
-
-`8_plots_splicing.ipynb`
+`7_plots_splicing.ipynb`
 
 Plotting transcript expression using PSI and DTU measures.
 
