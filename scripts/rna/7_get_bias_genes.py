@@ -4,20 +4,21 @@
 # Purpose: get male and female biased genes and create bed files for average profile plotting 
 
 # Libraries
-get_ipython().run_line_magic('matplotlib', 'inline')
+#get_ipython().run_line_magic('matplotlib', 'inline')
 import seaborn as sns
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import glob, sys, os
 import matplotlib.pyplot as plt 
-mpl.use('Agg')
+#mpl.use('Agg')
 from matplotlib_venn import venn2, venn2_circles
 import warnings
 warnings.filterwarnings('ignore')
 
 # Import necessary files and folders
-OUTDIR = "/data/compbio/aconard/cutnrun_v_chip/embryo_cut-n-run/results/gene_groups/"
+OUTDIR = "/data/compbio/aconard/"
+#OUTDIR = "/data/compbio/aconard/cutnrun_v_chip/embryo_cut-n-run/results/gene_groups/"
 
 # Import control tpm files for each sex and timepoint
 fbg_0_2 = "/data/compbio/aconard/splicing_pj/results/suppa_results_ncbi_trans/merged_0-2_f/control_0-2_f_iso.tpm"
@@ -188,17 +189,26 @@ print(len(bed_mbg_2_4.drop_duplicates(subset="gene_id")))
 dfs = [df_fbg_0_2, df_mbg_0_2, df_fbg_2_4, df_mbg_2_4]
 df_list = ["df_fbg_0_2", "df_mbg_0_2", "df_fbg_2_4", "df_mbg_2_4"]
 
+ctn = 0
 for d, dl in zip(dfs, df_list):
+    print(dl)
+    ctn+=1
     hist_nums = list()
-    thresh = list()
+    thresh_list = list()
 
-    for threshold in range(10):
-        num_genes = len(d[d.apply(lambda x : np.mean(x.values) >= threshold, axis=1)])
-        # print(threshold, num_genes)
-        thresh.append(threshold)
+    for threshold in range(15):
+        #print(d)
+        df = d.select_dtypes(exclude=['object'])
+        num_genes = len(df[df.apply(lambda x : np.mean(x.values) >= threshold, axis=1)])
+        print(threshold, num_genes)
+        dfT = df.T
+        print(dfT[dfT > threshold].count())
+        thresh_list.append(threshold)
         hist_nums.append(num_genes)
         
     fig = plt.figure()
     ax = plt.axes()
     plt.title(dl)
-    ax.plot(thresh, hist_nums)
+    ax.plot(thresh_list, hist_nums,marker=".")
+    fig.savefig(OUTDIR+"/testa_plot_%s.png"%(str(ctn)))
+    plt.close()
