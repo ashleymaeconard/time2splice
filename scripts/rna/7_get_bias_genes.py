@@ -137,11 +137,14 @@ df_list = ["df_fbg_0_2", "df_mbg_0_2", "df_fbg_2_4", "df_mbg_2_4"]
 venn2([set(list(df_fbg_0_2.index)), set(list(df_mbg_0_2.index))],
 set_labels = ('f_trans_0_2', 'm_trans_0_2'))
 plt.title('Transcript overlaps 0-2 hours\n')
+plt.savefig(OUTDIR+'/test1.png')
 
 #2-4 h
 venn2([set(list(df_fbg_2_4.index)), set(list(df_mbg_2_4.index))],
 set_labels = ('f_trans_2_4', 'm_trans_2_4'))
 plt.title('Transcript overlaps 2-4 hours\n')
+plt.savefig(OUTDIR+'/test2.png')
+
 
 # Get differences between males and females 0 - 2 hours (which genes are only on in females and males - set difference)
 fb_0_2_trans = set.difference(set(df_fbg_0_2.index), set(df_mbg_0_2.index))
