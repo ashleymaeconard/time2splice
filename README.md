@@ -105,15 +105,11 @@ Find bias genes using control samples. <!> NOTE: Run this for every group pairs 
 
 `7_plots_splicing.ipynb`
 
-Plotting transcript expression using PSI and DTU measures.
+Plotting transcript abundance using PSI and DTU measures.
 
-`8_alt_plots_splicing.ipynb`
+`8_plots_splicing_time.ipynb`
 
-Alternative code base to plot transcript expression using PSI and DTU measures.
-
-`9_plots_splicing_time.ipynb`
-
-Plot alternative splicing genes within categories (all females, all males, females sex specific, male sex specific, female all rest, male all rest, female non-sex specific, male non-sex specific, female new sex specific, male new sex specific) over time.
+Plot alternative splicing genes within 2 categories (e.g. all females, all males, females sex specific, male sex specific, female all rest, male all rest, female non-sex specific, male non-sex specific, female new sex specific, male new sex specific). Each timepoint analysis should be run separately.
 
 Temporal protein-DNA analysis (scripts/protein_dna)
 ==========
