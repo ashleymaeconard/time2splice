@@ -6,7 +6,7 @@
 # Libraries
 import argparse
 import pandas as pd
-pd.set_option('display.max_colwidth',-1)
+pd.set_option('display.max_colwidth', None) # MODIFICATION: Changed -1 to None because Python told me to. 
 import mygene
 import glob
 import collections as c
@@ -17,6 +17,8 @@ import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
 from biothings_client import get_client
+# MOD:
+import subprocess
 
 def plot_NaN(filename, df3):
     # Total number of NaNs when converting gene IDs
@@ -114,7 +116,8 @@ def reformat_merge_iso_tpm(INPUTDIR, TIMEPOINT, SEX, CONTROLS_ONLY):
     if CONTROLS_ONLY:
         sample_types_to_compare = INPUTDIR+"/"+TIMEPOINT+"*"+"control"
     else:
-        sample_types_to_compare = INPUTDIR+"/"+TIMEPOINT+"_"+SEX+"_*"
+        sample_types_to_compare = INPUTDIR+"/*"+SEX+"*" #REMOVED _ in _*
+    print(sample_types_to_compare)
     for sample_dir in glob.glob(sample_types_to_compare):
         print("sample_dir", sample_dir)
         if os.path.isdir(sample_dir): # check only folders
@@ -130,7 +133,7 @@ def reformat_merge_iso_tpm(INPUTDIR, TIMEPOINT, SEX, CONTROLS_ONLY):
                 dict_samples_reps[rep_name]= sample_rep_name
 
                 # Iterating through iso_tmp.txt files
-                for file in glob.glob(rep_dir+"/iso_tmp.txt"):
+                for file in glob.glob(rep_dir+"/*iso_tmp.txt"):
                     print("file", file)
                     df = pd.read_csv(file, sep="\t", index_col=0)
                     print("Converting this dataframe to have sample.repnum and Flybase IDs.\n")
@@ -210,15 +213,27 @@ def main(args):
     OUTPUTDIR = args.outputdir
     CONTROLS_ONLY = args.controls_only
     DM6_NM_FB_MAP = args.map
+    CONVERTED = args.converted
 
     # Create output dir if needed
     if not os.path.exists(OUTPUTDIR):
         os.makedirs(OUTPUTDIR)
 
     df_final_1 = reformat_merge_iso_tpm(INPUTDIR, TIMEPOINT, SEX, CONTROLS_ONLY)
-    df_final_2 = remapping_NM_to_FBtr(df_final_1, DM6_NM_FB_MAP, OUTPUTDIR)
-    #df_final_2 = adding_flybase_IDs(df_final_1, DM6_NM_FB_MAP)
-    df_final_2.to_csv(OUTPUTDIR+"iso_tpm_merged.txt",sep="\t")
+    if CONVERTED:
+        df_final_1.to_csv(OUTPUTDIR+"/iso_tpm_merged.txt",sep="\t") #MOD: Added /
+        # MOD: Because conversion already completed need to remove gene_id from csv file.
+        bashCommand = "tail -c +2"+OUTPUTDIR+"/iso_tpm_merged.txt > temp.txt"
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        bashCommand2 = "mv temp.txt "+OUTPUTDIR+"/iso_tpm_merged.txt"
+        process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
+        # Use this to determine a potential source of error if needed!
+        output, error = process.communicate()
+    else:
+        df_final_2 = remapping_NM_to_FBtr(df_final_1, DM6_NM_FB_MAP, OUTPUTDIR)
+        df_final_2 = adding_flybase_IDs(df_final_1, DM6_NM_FB_MAP)
+        df_final_2.to_csv(OUTPUTDIR+"/iso_tpm_merged.txt",sep="\t")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Format SUPPA")
@@ -229,7 +244,10 @@ if __name__ == "__main__":
     parser.add_argument("outputdir", type=str) #e.g. "/data/compbio/aconard/splicing/results/suppa_results_ncbi_trans/merged_2-4_cf_cm/"
     parser.add_argument("sex", type=str, help="m or f")
     parser.add_argument("map", type=str, help="map from DM6, NM and FB (e.g. see BDGP6's fbtr_refseq.tsv file, could be less or more recent than dm6)")
+    # MOD: Added this to allow for better future usage. 
+    parser.add_argument("converted", type=bool, help="Have you already converted to flybase IDs? (0 for No and 1 for Yes.")
     
     args = parser.parse_args()
     
     main(args)
+

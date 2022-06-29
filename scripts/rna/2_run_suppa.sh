@@ -14,6 +14,7 @@ INPUT_DIR=$1 #
 OUTPUT_DIR=$2
 TRANS_LOC=$3
 PROCESSORS=$4
+SUPPA_PATH=/users/pmahable/data/pmahable/SUPPA
 
 # Make output directory if does not exist
 mkdir -p $OUTPUT_DIR
@@ -30,7 +31,7 @@ fi
 START=0
 i=$START
 
-for dir in $INPUT_DIR/*/
+for dir in $INPUT_DIR/
     do
     echo "Subdir:" ${dir}
     
@@ -65,11 +66,14 @@ for dir in $INPUT_DIR/*/
                 echo " "
 
                 # QUANTIFICATION
-                echo "(multipleFieldSelection.py -i $file -k 1 -f 4 -o $folderName/iso_tmp.txt ) &">> $COMMAND_SCRIPT
+                echo "(python3 ${SUPPA_PATH}/multipleFieldSelection.py -i $file -k 1 -f 4 -o $folderName/iso_tmp.txt ) &">> $COMMAND_SCRIPT
         done
     fi
 done
 
 # run command_script (.txt file saved in $OUTPUT_DIR)
 bash $COMMAND_SCRIPT
+
+
+
 

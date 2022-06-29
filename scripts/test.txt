@@ -1,0 +1,8 @@
+1_run_salmon.sh
+2_run_suppa.sh
+3_suppa_formatting.py
+4_suppa.sh
+5_calc_total_alt_splicing_piechart.py
+6_get_bias_genes.py
+7_plots_splicing.ipynb
+8_plots_splicing_time.ipynb

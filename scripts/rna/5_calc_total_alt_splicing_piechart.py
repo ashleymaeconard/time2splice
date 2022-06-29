@@ -6,7 +6,7 @@
 # Import libraries
 import argparse
 import pandas as pd
-pd.set_option('display.max_colwidth',-1)
+pd.set_option('display.max_colwidth',None)
 import glob, os, sys
 import collections as c
 from scipy import stats
