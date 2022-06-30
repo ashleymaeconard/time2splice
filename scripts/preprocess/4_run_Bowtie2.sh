@@ -96,7 +96,7 @@ echo "Processing .fastq files with Bowtie2 on $NUM_PROCESSORS processors."
 # Adding commands to a script.txt file
 if [ $FOLDERS_BETWEEN != 0 ]; 
 then
-    for dir in $INPUT_DIR/*/*
+    for dir in $INPUT_DIR/${folders}
         do
         echo " "
         echo "Subdir:" ${dir}
@@ -190,11 +190,11 @@ else
                     echo "wait" >> $COMMAND_SCRIPT
                 fi 
                 fileName=$(echo `basename $fastq`) # get filename from .fq.gz
-                replicateFolder=$(echo `basename $(dirname $fastq)`)
-                sampleFolder=$(echo `basename $(dirname $(dirname $fastq))`)
+                # replicateFolder=$(echo `basename $(dirname $fastq)`)
+                # sampleFolder=$(echo `basename $(dirname $(dirname $fastq))`)
                 
                 # Creating folder for all Bowtie2 outputs per file by removing R1 and R2 (e.g. MTb8-8)
-                folderName=${RESULTS_DIR}/${sampleFolder}/${replicateFolder}
+                folderName=${RESULTS_DIR}
                 
                 # Outputting directory for Bowtie2/sample_name
                 mkdir -p ${folderName}

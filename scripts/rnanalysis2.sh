@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J RNA Analysis
+#SBATCH -J RNAAnalysis
 
 #SBATCH -n 16
 #SBATCH --mem=8G
@@ -13,24 +13,30 @@
 #SBATCH --mail-user=pranav_mahableshwarkar@brown.edu
 
 echo "##### INSTRUCTIONS FOR PART TWO (SCRIPT THREE) ######
+The outputs from RNAnalysis1 will be in your suppa folder in a directory titled salmon. Please group
+all of your replicates into individual folders for each of your samples. Look to USER INPUT below for clarity. 
+
 The format is python3 ./rna/3_suppa_formatting.py input_folder output_name filter fbtr_refseq.tsv
 Step 2 produces iso_tmp.txt files for each replicate. These need to be merged in two different ways. 
-
 The first set of 4 merges will just be merging individual samples with themselves. The second set of four
 will merge x replicates of a sample with y replicates of the compared sample. 
 
-Output_Name -> The first four should just be: m_control, f_control, m_delgi (for example)
-            -> The second four should be the different comparisons you want to make.
+Output_Name -> The second four should be the different comparisons you want to make.
             -> C Male v C Female, C Male v M Male, C Female v M Female, M Male v M Female
  
 Filter -> To recognize which  folder to get input from, the scripts looks at the folder names.
        -> So to differentiate you need to make four folders. (One for each sample type.)
        -> 1. m_control 2. f_control 3. m_mutant 4. f_mutant (mutant can be replaced with your specific mutant name.)
        -> Make sure you put all replicates for each sample category in the respective folders.
+       -> If also analyzing by time point, make sure to appropriately place the naming scheme so that the script
+          can recognize TWO samples to group for 4_suppa. 
+
+Converted -> If you use the files listed in this script for salmon, you should automatically be in Fbgn Names
+             so your value for converted is listed as 1 in the script below. 
 
 Once you have completed this, comment out the following 'exit 1' and this instruction and run! 
 #####          COMPLETED          ######"
-exit 1
+# exit 1
 
 if [ $# -ne 4 ]; then
 	echo $0: "Usage: 'sbatch preprocess.sh' or 'bash preprocess.sh'
@@ -59,10 +65,10 @@ module load salmon/1.3.0
 module load gcc/8.3
 
 # Establish File Paths for all reference files. 
-REFSEQ="${REF_DIR}/reference/fbtr_refseq.tsv" 
-FBIOE="${REF_DIR}/reference/flybase_events/flybase.events.ioe"
-GENEGTF="${REF_DIR}/reference/genes.gtf"
-DMELGTF="${REF_DIR}/reference/dmel-all-r6.46.gtf"
+REFSEQ="${REF_DIR}/fbtr_refseq.tsv" 
+FBIOE="${REF_DIR}/flybase_events/flybase.events.ioe"
+GENEGTF="${REF_DIR}/genes.gtf"
+DMELGTF="${REF_DIR}/dmel-all-r6.46.gtf"
 
 # Checks to make sure that ALL reference files exist. 
 if [ ! -e $REFSEQ ] 
@@ -84,27 +90,32 @@ then
 fi
 echo "All Reference Files Found. Starting..."
 
-# USER INPUT: Highly recommended that m_ or f_ starts each one! Only need to edit Lines 90/91.
+SUPPARESULTS="${RES_DIR}/analysis/suppa"
+
+# USER INPUT: Highly recommended that m_ or f_ starts each one! Only need to edit Lines 91/92. Essential that
+# your folders follow the same names that you enter here. 
 CONNAME="control" 
 MUTNAME="delgi"
+
 # These are the four comparisons in 3. 
 CONMvF="control_m_f"
 MCONvMUT="m_control_delgi"
 FCONvMUT="f_control_delgi"
 MUTMvF="delgi_m_f"
 
+# This is used in 6_get_bias_genes to name the Male and Female samples. 
 FFLYTYPE="L3F"
 MFLYTYPE="L3M"
 
 # 3. A Merge must be run for EVERY 4_suppa.sh data comparison that is run (folder required to run SUPPA).
 # a) Control Males v Mutant Males. 
-python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${MCONvMUT} m ${REFSEQ}
+python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${MCONvMUT} m ${REFSEQ} 1
 # b) Control Females v Mutant Females.
-python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${FCONvMUT} f ${REFSEQ}
+python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${FCONvMUT} f ${REFSEQ} 1
 # c) Control Males v Control Females
-python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${CONMvF} ${CONNAME} ${REFSEQ}
+python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${CONMvF} ${CONNAME} ${REFSEQ} 1
 # d) Mutant Males v Mutant Females
-python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${MUTMvF} ${MUTNAME} ${REFSEQ}
+python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${MUTMvF} ${MUTNAME} ${REFSEQ} 1
 
 # 4. Run SUPPA Differential Splicing Analysis. For each run, there must be a corresponding merge call made. 
 #    Need to make sure that input merged_iso_tpm file ONLY has replicate names in first row. Check the if group at 229 of this script if errors arise.
@@ -119,7 +130,7 @@ module load R/4.2.0 gcc/10.2 pcre2/10.35 intel/2020.2 texlive/2018
 ./rna/4_suppa.sh ${SUPPARESULTS}/${MUTMvF} ${FBIOE} $SUPPA_PATH ${GENEGTF} f_${MUTNAME} m_${MUTNAME}
 
 # 5. Create Pie Charts for Alternate Splicing Pattern Recognition
-#    Had to pipinstall seaborn and matplotlib_venn (Install these in your conda environment if you run into issues.)
+#    Had to pipinstall seaborn aned matplotlib_venn (Install these in your conda environment if you run into issues.)
 mkdir ${SUPPARESULTS}/5_PieCharts
 python3 rna/5_calc_total_alt_splicing_piechart.py ${SUPPARESULTS}/${CONMvF}/f_${CONNAME}_iso_events.psi ${SUPPARESULTS}/5_PieCharts f_${CONNAME} >> ${SUPPARESULTS}/5_PieCharts/f_${CONNAME}_pie.txt
 python3 rna/5_calc_total_alt_splicing_piechart.py ${SUPPARESULTS}/${CONMvF}/m_${CONNAME}_iso_events.psi ${SUPPARESULTS}/5_PieCharts m_${CONNAME} >> ${SUPPARESULTS}/5_PieCharts/m_${CONNAME}_pie.txt
@@ -140,6 +151,11 @@ python3 rna/6_get_bias_genes.py ${SUPPARESULTS}/${CONMvF}/f_${CONNAME}_iso.tpm $
 #    To do this part, you have to go through 7_plots_splicing.ipynb and manually edit everything and then run from there!
 #    When I ran this, I had to manually go through the dPSI files and make sure that the column headers were identical across all samples. 
 
-# 8. If you are using time-specific samples, run this step. I am not so I did not do this step. You will likely have to reformat the Notebook.
+# FOR EXAMPLE: When I ran this on my data set, my M Control v Mutant had these column headings: 
+# m_control_iso_events-m_delgi_iso_events_dPSI	m_control_iso_events-m_delgi_iso_events_p-val
+# I changed this to:
+# control_iso_events-delgi_iso_events_dPSI	control_iso_events-delgi_iso_events_p-val
+# In doing this to the male and female samples, there is a standardized column headings for male and female samples.
 
+# 8. If you are using time-specific samples, run this step. Read through the notebook for debugging purposes for input formatting.
 echo "Done"

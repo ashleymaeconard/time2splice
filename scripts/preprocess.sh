@@ -43,8 +43,8 @@ FASTQF="${DATA_DIR}/fastq"
 
 
 # BOWTIE references the genome of D Melanogaster that is needed for BowTie2 Alignment. 
-BOWTIE="${REF_DIR}/reference/bowtie2_index/dmel_all_chromosome"
-if [ -d "${REF_DIR}/reference/bowtie2_index/" ] 
+BOWTIE="${REF_DIR}/bowtie2_index/dmel_all_chromosome"
+if [ -d "${REF_DIR}/bowtie2_index/" ] 
 then
     echo "dmel_all_chromsome found in reference folder. Continuing..."
 else 

@@ -16,6 +16,8 @@ if [ $# -ne 6 ]; then
 	exit 1
 fi
 
+echo "If 3_trim_galore fails, this could be due to naming assumptions made in the script."
+
 # CORES_PER_COMMAND_RUN
 NUM_COMMANDS=$1
 INDIR=$2

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J RNA Analysis
+#SBATCH -J RNAAnalysis
 
 #SBATCH -n 16
 #SBATCH --mem=8G

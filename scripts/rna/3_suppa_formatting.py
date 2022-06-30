@@ -220,15 +220,9 @@ def main(args):
         os.makedirs(OUTPUTDIR)
 
     df_final_1 = reformat_merge_iso_tpm(INPUTDIR, TIMEPOINT, SEX, CONTROLS_ONLY)
-    if CONVERTED:
+    if CONVERTED == 1:
+        print("Skipping conversion because input files already in Fbgn ID")
         df_final_1.to_csv(OUTPUTDIR+"/iso_tpm_merged.txt",sep="\t") #MOD: Added /
-        # MOD: Because conversion already completed need to remove gene_id from csv file.
-        bashCommand = "tail -c +2"+OUTPUTDIR+"/iso_tpm_merged.txt > temp.txt"
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-        bashCommand2 = "mv temp.txt "+OUTPUTDIR+"/iso_tpm_merged.txt"
-        process2 = subprocess.Popen(bashCommand2.split(), stdout=subprocess.PIPE)
-        # Use this to determine a potential source of error if needed!
-        output, error = process.communicate()
     else:
         df_final_2 = remapping_NM_to_FBtr(df_final_1, DM6_NM_FB_MAP, OUTPUTDIR)
         df_final_2 = adding_flybase_IDs(df_final_1, DM6_NM_FB_MAP)
@@ -245,7 +239,7 @@ if __name__ == "__main__":
     parser.add_argument("sex", type=str, help="m or f")
     parser.add_argument("map", type=str, help="map from DM6, NM and FB (e.g. see BDGP6's fbtr_refseq.tsv file, could be less or more recent than dm6)")
     # MOD: Added this to allow for better future usage. 
-    parser.add_argument("converted", type=bool, help="Have you already converted to flybase IDs? (0 for No and 1 for Yes.")
+    parser.add_argument("converted", type=int, help="Have you already converted to flybase IDs? (0 for No and 1 for Yes.")
     
     args = parser.parse_args()
     

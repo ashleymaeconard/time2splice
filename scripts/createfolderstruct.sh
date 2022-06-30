@@ -10,8 +10,6 @@ INDIR=$1
 
 echo "Making time2splice folder within the directory."
 mkdir "${INDIR}/time2splice"
-echo "Making output subdirectory in current directory."
-mkdir output
 
 echo "Making data and results folders."
 echo "Please put all input fastq files into inputdir/time2splice/data/fastq."
@@ -23,11 +21,14 @@ mkdir "${INDIR}/time2splice/data/count"
 mkdir "${INDIR}/time2splice/results/preproces"
 mkdir "${INDIR}/time2splice/results/analysis"
 
-echo "Making subdirectories for steps of Preprocessing and Analysis."
 mkdir "${INDIR}/time2splice/results/preproces/fastqc"
 mkdir "${INDIR}/time2splice/results/preproces/trim_galore_fastqc"
 mkdir "${INDIR}/time2splice/results/preproces/alignment"
 mkdir "${INDIR}/time2splice/results/analysis/salmon"
 mkdir "${INDIR}/time2splice/results/analysis/suppa"
 
-echo "Done"
+echo "Prior to running the scripts, make sure you have all packages downloaded and the
+      time2splice conda environment activated. Please place all reference files in a reference
+      folder. The working file path for that directory is needed for the scripts."
+
+echo "Done."

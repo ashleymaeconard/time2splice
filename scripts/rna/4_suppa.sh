@@ -31,6 +31,19 @@ TRANSISOFORM=/users/pmahable/data/pmahable/data/reference/fb_trans.isoforms.ioi
 delim=","
 
 # Treatments
+# MOD: If conversion is skipped in 3_suppa_formatting, "gene_id " is in merged which messes up the below scripts.
+x="$(head -c 8 ${RES_FOLDER}/iso_tpm_merged.txt)"
+echo "$x"
+echo ${#x} 
+if [ "$x" = "gene_id	" ]
+then
+	echo "removing 'gene_id ' from iso_tpm_merged.txt"
+	tail -c +9 "${RES_FOLDER}/iso_tpm_merged.txt" > "${RES_FOLDER}/gene_remove.txt"
+	mv "${RES_FOLDER}/gene_remove.txt" "${RES_FOLDER}/iso_tpm_merged.txt"
+else 
+	echo "Column set up seems good. Proceeding with SUPPA."
+fi
+
 # MODIFICATION: Added ${RES_FOLDER} to iso_tpm files. 
 head -1 ${RES_FOLDER}/iso_tpm_merged.txt | sed 's/\t/\n/g; /^$/d'| grep $TREAT > header_treatment.txt
 head header_treatment.txt
