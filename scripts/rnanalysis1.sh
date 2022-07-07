@@ -51,7 +51,7 @@ fi
 echo "Reference Files Found. Starting..."
 
 # IMPORTANT: Step 1 needs to be modified based on the formatting of the trim galore fastq file (Line 89).
-./rna/1_run_salmon.sh ${RES_DIR}/preprocess/trim_galore_fastqc ${RES_DIR}/analysis/salmon ${REF_DIR}/reference ${DMELALLTRANSCRIPT} 16 4 1
+./rna/1_run_salmon.sh ${RES_DIR}/preprocess/trim_galore_fastqc ${RES_DIR}/analysis/salmon ${REF_DIR} ${DMELALLTRANSCRIPT} 16 4 1
 
 # 2. Run SUPPA to isolate splicing differences within a sample type.
 ./rna/2_run_suppa.sh ${RES_DIR}/analysis/salmon ${RES_DIR}/analysis/suppa ${DMELALLTRANSCRIPT}  1
