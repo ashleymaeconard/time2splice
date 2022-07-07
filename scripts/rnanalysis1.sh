@@ -2,7 +2,7 @@
 
 #SBATCH -J RNAAnalysis
 
-#SBATCH -n 16
+#SBATCH -n 24
 #SBATCH --mem=8G
 #SBATCH -t 12:00:00
 
@@ -22,7 +22,7 @@ if [ $# -ne 4 ]; then
         exit 1
 fi
 
-echo "This entire script CANNOT be run all at once. Please read through."
+echo "The RNA Analysis is done in two parts. This is ONLY steps 1 and 2."
 
 # Activate in the time2splice conda environment. 
 module load anaconda/2020.02
@@ -32,7 +32,7 @@ conda activate time2splice
 DATA_DIR=$1
 RES_DIR=$2 
 REF_DIR=$3
-SUPPA_PATH=/users/pmahable/data/pmahable/SUPPA #$4
+SUPPA_PATH=$4
 
 # Load the appropriate modules!
 module load samtools/1.13
@@ -40,10 +40,10 @@ module load salmon/1.3.0
 module load gcc/8.3
 
 # Establish File Paths for all reference files. 
-DMELALLTRANSCRIPT="${REF_DIR}/reference/dmel-all-transcript-r6.46.fasta"
+DMELALLTRANSCRIPT="${REF_DIR}/dmel-all-transcript-r6.46.fasta"
 
 # Checks to make sure that ALL reference files exist. 
-if [ ! -e $DMELALLTRANSCRIPT] 
+if [ ! -e $DMELALLTRANSCRIPT ] 
 then
     echo $0:"${DMELALLTRANSCRIPT} not found. Please make sure file path is correct."
     exit 1
@@ -56,5 +56,5 @@ echo "Reference Files Found. Starting..."
 # 2. Run SUPPA to isolate splicing differences within a sample type.
 ./rna/2_run_suppa.sh ${RES_DIR}/analysis/salmon ${RES_DIR}/analysis/suppa ${DMELALLTRANSCRIPT}  1
 
-echo "Finished! Please read lines 65-80 in the script and then finish your analysis."
+echo "Finished! Please read the instructions in rnanlysis2.sh before running the next script."
 
