@@ -4,8 +4,8 @@
 # Last Mod: 7/5/2019
 # Purpose: Run Suppa for treatment and control samples.
 
-if [ $# -lt 4 ]; then
-	echo $0: "Usage: ./1_run_suppa.sh /PATH/TO/INPUT_DIR/ containing inputs /PATH/TO/OUTPUT_DIR/ (suggest placing in /results/suppa/) TRANSCRIPTOME_LOC PROCESSORS (per batch to run on cluster)"
+if [ $# -lt 5 ]; then
+	echo $0: "Usage: ./1_run_suppa.sh /PATH/TO/INPUT_DIR/ containing inputs /PATH/TO/OUTPUT_DIR/ (suggest placing in /results/suppa/) TRANSCRIPTOME_LOC PROCESSORS (per batch to run on cluster) SUPPA_PATH"
 	exit 1
 fi
 
@@ -14,7 +14,7 @@ INPUT_DIR=$1 #
 OUTPUT_DIR=$2
 TRANS_LOC=$3
 PROCESSORS=$4
-SUPPA_PATH=/users/pmahable/data/pmahable/SUPPA
+SUPPA_PATH=$5
 
 # Make output directory if does not exist
 mkdir -p $OUTPUT_DIR

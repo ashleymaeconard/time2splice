@@ -57,7 +57,7 @@ conda activate time2splice
 DATA_DIR=$1
 RES_DIR=$2 
 REF_DIR=$3
-SUPPA_PATH=/users/pmahable/data/pmahable/SUPPA #$4
+SUPPA_PATH=$4
 
 # Load the appropriate modules!
 module load samtools/1.13
@@ -66,9 +66,10 @@ module load gcc/8.3
 
 # Establish File Paths for all reference files. 
 REFSEQ="${REF_DIR}/fbtr_refseq.tsv" 
-FBIOE="${REF_DIR}/flybase_events/flybase.events.ioe"
+FBIOE="${REF_DIR}/flybase_events/flybase.events.ioe" # You might have to look in to acquiring this file. 
 GENEGTF="${REF_DIR}/genes.gtf"
 DMELGTF="${REF_DIR}/dmel-all-r6.46.gtf"
+TRANSIOI="${REF_DIR}/fb_trans.isoforms.ioi"
 
 # Checks to make sure that ALL reference files exist. 
 if [ ! -e $REFSEQ ] 
@@ -87,21 +88,26 @@ elif [ ! -e $DMELGTF ]
 then 
     echo $0:"${DMELGTF} not found. Please make sure file path is correct."
     exit 1
+elif [ ! -e $TRANSIOI ] 
+then 
+    echo $0:"${TRANSIOI} not found. Please make sure file path is correct."
+    exit 1
 fi
+
 echo "All Reference Files Found. Starting..."
 
 SUPPARESULTS="${RES_DIR}/analysis/suppa"
 
-# USER INPUT: Highly recommended that m_ or f_ starts each one! Only need to edit Lines 91/92. Essential that
+# USER INPUT: Highly recommended that m_ or f_ starts each one! Essential that
 # your folders follow the same names that you enter here. 
-CONNAME="control" 
-MUTNAME="delgi"
+CONNAME="L3_BrControl" 
+MUTNAME="L3_BrCLAMPRNAi"
 
 # These are the four comparisons in 3. 
-CONMvF="control_m_f"
-MCONvMUT="m_control_delgi"
-FCONvMUT="f_control_delgi"
-MUTMvF="delgi_m_f"
+CONMvF="BrControl_m_f"
+MCONvMUT="m_BrControl_ClampRNAi"
+FCONvMUT="f_BrControl_ClampRNAi"
+MUTMvF="BrClampRNAi_m_f"
 
 # This is used in 6_get_bias_genes to name the Male and Female samples. 
 FFLYTYPE="L3F"
@@ -121,13 +127,13 @@ python3 ./rna/3_suppa_formatting.py ${SUPPARESULTS}/ ${SUPPARESULTS}/${MUTMvF} $
 #    Need to make sure that input merged_iso_tpm file ONLY has replicate names in first row. Check the if group at 229 of this script if errors arise.
 module load R/4.2.0 gcc/10.2 pcre2/10.35 intel/2020.2 texlive/2018
 # a) Control Males v Mutant Males. 
-./rna/4_suppa.sh ${SUPPARESULTS}/${MCONvMUT} ${FBIOE} $SUPPA_PATH ${GENEGTF} m_${CONNAME} m_${MUTNAME}
+./rna/4_suppa.sh ${SUPPARESULTS}/${MCONvMUT} ${FBIOE} $SUPPA_PATH ${GENEGTF} m_${CONNAME} m_${MUTNAME} $TRANSIOI
 # b) Control Females v Mutant Females.
-./rna/4_suppa.sh ${SUPPARESULTS}/${FCONvMUT} ${FBIOE} $SUPPA_PATH ${GENEGTF} f_${CONNAME} f_${MUTNAME}
+./rna/4_suppa.sh ${SUPPARESULTS}/${FCONvMUT} ${FBIOE} $SUPPA_PATH ${GENEGTF} f_${CONNAME} f_${MUTNAME} $TRANSIOI
 # c) Control Males v Control Females
-./rna/4_suppa.sh ${SUPPARESULTS}/${CONMvF} ${FBIOE} $SUPPA_PATH ${GENEGTF} f_${CONNAME} m_${CONNAME}
+./rna/4_suppa.sh ${SUPPARESULTS}/${CONMvF} ${FBIOE} $SUPPA_PATH ${GENEGTF} f_${CONNAME} m_${CONNAME} $TRANSIOI
 # d) Mutant Males v Mutant Females
-./rna/4_suppa.sh ${SUPPARESULTS}/${MUTMvF} ${FBIOE} $SUPPA_PATH ${GENEGTF} f_${MUTNAME} m_${MUTNAME}
+./rna/4_suppa.sh ${SUPPARESULTS}/${MUTMvF} ${FBIOE} $SUPPA_PATH ${GENEGTF} f_${MUTNAME} m_${MUTNAME} $TRANSIOI
 
 # 5. Create Pie Charts for Alternate Splicing Pattern Recognition
 #    Had to pipinstall seaborn aned matplotlib_venn (Install these in your conda environment if you run into issues.)

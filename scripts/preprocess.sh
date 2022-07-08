@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH -J Preprocess_ArrayJobs
 
-#SBATCH -n 8
+#SBATCH -n 2
 #SBATCH --mem=16G
 #SBATCH -t 4:30:00
 
 # Create an array SBATCH Job for all files
 ### ONLY CHANGE THE FOLLOWING LINE IN THIS FILE ####
-#SBATCH  --array=1-4
+#SBATCH  --array=1-16
 
 #SBATCH -o output/output-%a.out
 #SBATCH --mail-type=END
@@ -72,11 +72,11 @@ DIREC=${ALLDATA[$SLURM_ARRAY_TASK_ID]}
 echo "Preparations All Made. Starting FastQC..."
 
 # 2. Run the FASTQC on all files in all folders and make new folders in results.
-# ./preprocess/2_run_fastQC.sh 4 $DATA_DIR/fastq/${DIREC} $RES_DIR/preprocess/fastqc/${DIREC}
+./preprocess/2_run_fastQC.sh 4 $DATA_DIR/fastq/${DIREC} $RES_DIR/preprocess/fastqc/${DIREC}
 echo "Completed FastQC. Starting Trim_Galore..."
 
 # 3. Run TrimGalore 
-# ./preprocess/3_run_trim_galore.sh 4 $DATA_DIR/fastq/${DIREC} $RES_DIR/preprocess/trim_galore_fastqc/${DIREC} 30 cutadapt 0
+./preprocess/3_run_trim_galore.sh 4 $DATA_DIR/fastq/${DIREC} $RES_DIR/preprocess/trim_galore_fastqc/${DIREC} 30 cutadapt 0
 echo "Completed Trim_Galore. Starting BowTie2..."
 
 # 4. Run BowTie2 as the final PreProcessing Step.  

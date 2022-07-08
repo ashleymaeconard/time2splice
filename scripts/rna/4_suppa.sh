@@ -12,6 +12,7 @@ if [ $# -lt 2 ]; then
 				4) /PATH/TO/genes.gtf
 				5) treatment name (e.g. 'treatment' or 'RNAi')
 				6) control name (e.g. 'control' or 'rescue'
+				7) /PATH/TO/fb_trans.isoforms.ioi 
 				NOTE: NO SPACES OR SPECIAL CHARACTERS IN NAMES besides '-' or '.' ALLOWED."
 
 	exit 1
@@ -24,7 +25,7 @@ SUPPA_DIR=$3
 GENES_GTF=$4
 TREAT=$5
 CONTROL=$6
-TRANSISOFORM=/users/pmahable/data/pmahable/data/reference/fb_trans.isoforms.ioi 
+TRANSISOFORM=$7
 # MOD: Added ^^ because of my different file structure. 
 
 # Gather list of treatment and controls
