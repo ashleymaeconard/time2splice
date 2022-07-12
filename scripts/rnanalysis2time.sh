@@ -140,5 +140,8 @@ module load R/4.2.0 gcc/10.2 pcre2/10.35 intel/2020.2 texlive/2018
 # d) Mutant Males v Mutant Females
 ./rna/4_suppa.sh ${SUPPARESULTS}/${CAT4} ${FBIOE} $SUPPA_PATH ${GENEGTF} m_${TIME1MUT} m_${TIME2MUT} $TRANSIOI
 
+# 7. Plots Splicing: You HAVE to run Jupyter Notebook 7_plots_splicing on both time points before running Step 8. Step 8 will require the
+#    two .tsv files that the individual timepoint analysis produces. 
+
 # 8. If you are using time-specific samples, run this step. Read through the notebook for debugging purposes for input formatting.
 echo "Done"
