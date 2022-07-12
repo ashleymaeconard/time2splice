@@ -62,7 +62,7 @@ echo "These are the samples being checked. The first one is meant to be null/emp
 for SAMPLE in "${ALLDATA[@]}"
 do
     if [[ "$SAMPLE" == *"_R"* ]]; then
-        echo "Sample title including '_R*' was detected"
+        echo "Sample title including '_R*' was detected. Please change the naming schema."
         exit 1
     fi
 done

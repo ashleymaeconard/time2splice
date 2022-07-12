@@ -4,7 +4,7 @@
 
 #SBATCH -n 16
 #SBATCH --mem=8G
-#SBATCH -t 12:00:00
+#SBATCH -t 4:00:00
 
 # Create a SBATCH Job for all files
 #SBATCH -o output/output.out
@@ -100,18 +100,21 @@ SUPPARESULTS="${RES_DIR}/analysis/suppa"
 
 # USER INPUT: Highly recommended that m_ or f_ starts each one! Essential that
 # your folders follow the same names that you enter here. 
-CONNAME="L3_BrControl" 
-MUTNAME="L3_BrCLAMPRNAi"
+CONNAME="Ad_BrControl"      # my folders are m_Ad_BrControl and f_Ad_BrControl
+MUTNAME="Ad_BrCLAMPRNAi"    # my folders are m_Ad_BrCLAMPRNAi and f_Ad_BrCLAMPRNAi
+
+# I would recommend that you read through the scripts below to understand how the script will 
+# use your input to choose the appropriate samples in each comparison. 
 
 # These are the four comparisons in 3. 
-CONMvF="BrControl_m_f"
-MCONvMUT="m_BrControl_ClampRNAi"
-FCONvMUT="f_BrControl_ClampRNAi"
-MUTMvF="BrClampRNAi_m_f"
+CONMvF="AdBrControl_m_f"
+MCONvMUT="m_AdBrControl_ClampRNAi"
+FCONvMUT="f_AdBrControl_ClampRNAi"
+MUTMvF="AdBrClampRNAi_m_f"
 
 # This is used in 6_get_bias_genes to name the Male and Female samples. 
-FFLYTYPE="L3F"
-MFLYTYPE="L3M"
+FFLYTYPE="Ad"
+MFLYTYPE="Ad"
 
 # 3. A Merge must be run for EVERY 4_suppa.sh data comparison that is run (folder required to run SUPPA).
 # a) Control Males v Mutant Males. 
@@ -153,7 +156,7 @@ python3 rna/5_calc_total_alt_splicing_piechart.py ${SUPPARESULTS}/${MUTMvF}/m_${
 mkdir ${RES_DIR}/analysis/suppa/6_control_bias_genes
 python3 rna/6_get_bias_genes.py ${SUPPARESULTS}/${CONMvF}/f_${CONNAME}_iso.tpm ${SUPPARESULTS}/${CONMvF}/m_${CONNAME}_iso.tpm ${SUPPARESULTS}/6_control_bias_genes ${FFLYTYPE} ${MFLYTYPE} ${DMELGTF}
 
-# 7. Using the DPSI files produced from SUPPA, create plots to visualize the data. (i.e. volcano, violin, notch plots, etc.)
+# 7. Using the diffSplice.dpsi files produced from SUPPA, create plots to visualize the data. (i.e. volcano, violin, notch plots, etc.)
 #    To do this part, you have to go through 7_plots_splicing.ipynb and manually edit everything and then run from there!
 #    When I ran this, I had to manually go through the dPSI files and make sure that the column headers were identical across all samples. 
 
@@ -163,5 +166,4 @@ python3 rna/6_get_bias_genes.py ${SUPPARESULTS}/${CONMvF}/f_${CONNAME}_iso.tpm $
 # control_iso_events-delgi_iso_events_dPSI	control_iso_events-delgi_iso_events_p-val
 # In doing this to the male and female samples, there is a standardized column headings for male and female samples.
 
-# 8. If you are using time-specific samples, run this step. Read through the notebook for debugging purposes for input formatting.
 echo "Done"

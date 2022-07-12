@@ -34,8 +34,6 @@ delim=","
 # Treatments
 # MOD: If conversion is skipped in 3_suppa_formatting, "gene_id " is in merged which messes up the below scripts.
 x="$(head -c 8 ${RES_FOLDER}/iso_tpm_merged.txt)"
-echo "$x"
-echo ${#x} 
 if [ "$x" = "gene_id	" ]
 then
 	echo "removing 'gene_id ' from iso_tpm_merged.txt"
