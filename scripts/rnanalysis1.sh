@@ -1,4 +1,8 @@
 #!/bin/bash
+# rnanalysis1.sh
+# Pranav Mahableshwarkar
+# Last Mod. 7/15/22
+# Purpose: Prepare all the outputs of preprocessing for SUPPA. 
 
 #SBATCH -J RNAAnalysis
 

@@ -1,4 +1,8 @@
 #!/bin/bash
+# rnanalysis1.sh
+# Pranav Mahableshwarkar
+# Last Mod. 7/15/22
+# Purpose: Create the folders for SUPPA and run splicing analysis in RNA scripts. 
 
 #SBATCH -J RNAAnalysis
 

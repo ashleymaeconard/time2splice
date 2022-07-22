@@ -1,4 +1,9 @@
 #!/bin/bash
+# preprocess.sh
+# Pranav Mahableshwarkar
+# Last Mod. 7/15/22
+# Purpose: Batch script to run all preprocess scripts in an array job format.
+
 #SBATCH -J Preprocess_ArrayJobs
 
 #SBATCH -n 2
@@ -7,6 +12,7 @@
 
 # Create an array SBATCH Job for all files
 ### ONLY CHANGE THE FOLLOWING LINE IN THIS FILE ####
+### You might have to change -n val above based on user core limit ###
 #SBATCH  --array=1-16
 
 #SBATCH -o output/output-%a.out
@@ -21,6 +27,8 @@ module load bowtie2/2.4.2
 module load python/3.7.4
 module load samtools/1.13 
 module load gcc/8.3
+
+module load subread/1.6.2
 
 if [ $# -ne 3 ]; then
 	echo $0: "Usage: 'sbatch preprocess.sh' or 'bash preprocess.sh'

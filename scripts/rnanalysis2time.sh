@@ -1,4 +1,8 @@
 #!/bin/bash
+# rnanalysis1.sh
+# Pranav Mahableshwarkar
+# Last Mod. 7/15/22
+# Purpose: Run timepoint splicing comparisons. 
 
 #SBATCH -J RNAAnalysis
 

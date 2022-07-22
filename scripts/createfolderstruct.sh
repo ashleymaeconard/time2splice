@@ -1,4 +1,8 @@
 #!/bin/bash
+# createfolderstruct.sh
+# Pranav Mahableshwarkar
+# Last Mod. 7/15/22
+# Purpose: Create a folder structure that can be used in the time2splice scripts. 
 
 if [ $# -ne 1 ]; then
 	echo $0: "Usage: 'bash createfolderstruct.sh'
